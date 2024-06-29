@@ -1,17 +1,19 @@
 <?php
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect form data
+    // Collect mysql database
+    $servername = $_POST["localhost"];
+    $userid = $_POST['userid'];
     $username = $_POST['username'];
-    $email = $_POST['email'];
     $password = $_POST['password'];
+    $database = $_POST["HackTheBoxOffice"];
     
     // Validate form data (you can add more validation)
     if (empty($username) || empty($email) || empty($password)) {
         echo "All fields are required";
     } else {
         // Connect to database (assuming MySQL here)
-        $conn = new mysqli("localhost", "username", "password", "database");
+        $conn = new mysqli("localhost", "userid", "username", "password", "HackTheBoxOffice");
         
         // Check connection
         if ($conn->connect_error) {
@@ -22,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
         // Insert data into database
-        $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
+        $sql = "INSERT INTO users (username, email, password) VALUES ('$userid', '$username', '$hashed_password')";
         if ($conn->query($sql) === TRUE) {
             echo "Registration successful";
         } else {
