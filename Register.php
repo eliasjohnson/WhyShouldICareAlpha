@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Hash password (for security)
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
-        // Insert data into database
+        // Insert data into database Redirection of successful registraion to new page. 
         $sql = "INSERT INTO users (username, email, password) VALUES ('$userid', '$username', '$hashed_password')";
         if ($conn->query($sql) === TRUE) {
             echo "Registration successful";
